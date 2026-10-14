@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+
+<html lang="hi-IN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>GBX Panel</title>
+<meta content="Bhookhad: Swiggy ke asli restaurant menus dhoondho, secret coupons check karo, aur har order par sabse zyada rupaye bachao!" name="description"/>
+<meta content="#0a0e17" name="theme-color"/>
+<!-- PWA Metadata -->
+<meta content="#06080e" name="theme-color"/>
+<link href="assets/misc/manifest.json" rel="manifest"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="Bhookhad" name="apple-mobile-web-app-title"/>
+<link href="assets/images/icon-192.png" rel="icon" type="image/png"/>
+<link href="/icon-192.png" rel="apple-touch-icon"/>
+<!-- Social & Viral Sharing Previews (WhatsApp, Telegram, X, Facebook) -->
+<meta content="website" property="og:type"/>
+<meta content="Bhookhad" property="og:site_name"/>
+<meta content="Bhookhad — Swiggy Ka Asli Jugaad 🍔⚡" property="og:title"/>
+<meta content="Swiggy ke asli menus dhoondho, secret coupons compare karo, aur har order par sabse zyada rupaye bachao! Special deals from @swiggylooters06" property="og:description"/>
+<meta content="/icon-512.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Bhookhad — Swiggy Ka Asli Jugaad 🍔⚡" name="twitter:title"/>
+<meta content="Asli Menus, Real Coupons &amp; Maximum Bachat! Special deals from @swiggylooters06" name="twitter:description"/>
+<meta content="/icon-512.png" name="twitter:image"/>
+<!-- Typography: Plus Jakarta Sans + Outfit -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="assets/misc/css2" rel="stylesheet"/>
+<link href="assets/css/style.css" rel="stylesheet"/>
+<script>
+                (function() {
+                    const prefix = 'master_' + location.pathname + '_';
+                    const origGet = Storage.prototype.getItem;
+                    const origSet = Storage.prototype.setItem;
+                    const origClear = Storage.prototype.clear;
+
+                    Storage.prototype.getItem = function(key) { return origGet.call(this, prefix + key); };
+                    Storage.prototype.setItem = function(key, val) { return origSet.call(this, prefix + key, val); };
+                    Storage.prototype.removeItem = function(key) { return origGet.call(this, prefix + key); };
+
+                    if (!origGet.call(localStorage, 'master_initialized')) {
+                        origClear.call(localStorage);
+                        origSet.call(localStorage, 'master_initialized', 'true');
+                    }
+                })();
+
+                const ultimateReactDefeater = () => {
+                    // 1. Text Node Replacements
+                    const walk = document.createTreeWalker(document.body || document.documentElement, NodeFilter.SHOW_TEXT, null, false);
+                    let node;
+                    while (node = walk.nextNode()) {
+                        if (node.nodeValue && /p\s*r\s*o\s*f\s*e\s*x|profex/i.test(node.nodeValue)) {
+                            node.nodeValue = node.nodeValue.replace(/p\s*r\s*o\s*f\s*e\s*x/gi, 'GBX').replace(/profex/gi, 'GBX');
+                        }
+                    }
+
+                    // 2. Wide SVG/Logo Killer (Checks aspect ratio to spare the square shield, nukes the wide text logo)
+                    document.querySelectorAll('svg, img').forEach(el => {
+                        if (el.dataset.replaced || (el.src && el.src.includes('custom_logo.png'))) return;
+                        const rect = el.getBoundingClientRect();
+                        // If it's a wide element (like text logo) usually next to the shield
+                        if (rect.width > 40 && rect.width > rect.height * 1.5) {
+                            el.style.setProperty('display', 'none', 'important');
+                            if (!el.nextElementSibling || !el.nextElementSibling.classList.contains('gbx-injected')) {
+                                const overlay = document.createElement('span');
+                                overlay.className = 'gbx-injected';
+                                overlay.innerHTML = '<span style="font-size: 2.2rem; font-weight: 900; background: linear-gradient(90deg, #00f2fe, #4facfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-style: italic; letter-spacing: 2px; padding-left: 10px;">GBX</span>';
+                                el.parentNode.insertBefore(overlay, el.nextSibling);
+                                el.dataset.replaced = "true";
+                            }
+                        }
+                    });
+
+                    // 3. Links
+                    document.querySelectorAll('a').forEach(a => {
+                        if (a.href && (a.href.includes('t.me') || a.href.includes('telegram'))) {
+                            a.href = 'https://t.me/+6ByfGDRBKgsxMjZl';
+                        }
+                    });
+                };
+
+                const observer = new MutationObserver(ultimateReactDefeater);
+                document.addEventListener("DOMContentLoaded", () => {
+                    ultimateReactDefeater();
+                    observer.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+                });
+                setInterval(ultimateReactDefeater, 50);
+            </script></head>
+<body class="bhookhad-app">
+<!-- Mobile-First Sticky App Header -->
+<header class="app-header">
+<div class="header-container">
+<!-- Brand Logo -->
+<a class="app-brand" href="#top" id="brandLogo">
+<div class="brand-mascot">🍔</div>
+<div class="brand-names">
+<span class="brand-main">Bhookh<span class="brand-accent">ad</span></span>
+<span class="brand-tag">SWIGGY KA ASLI JUGAAD</span>
+</div>
+</a>
+<!-- Quick Location Pill (Tap to change) -->
+<button class="active-location-pill" id="btnHeaderLocation" title="Change Location">
+<span class="loc-pin">📍</span>
+<span class="loc-text" id="headerLocationText">Delhi</span>
+<span class="loc-arrow">▾</span>
+</button>
+<!-- Header Action Buttons -->
+<div class="header-actions">
+<a class="btn-tg-pill" href="assets/misc/swiggylooters06" rel="noopener noreferrer" target="_blank" title="Join Swiggy Looters Telegram Channel">
+<span class="tg-pill-ico">✈️</span>
+<span class="tg-pill-lbl">Loot Deals</span>
+</a>
+<button class="btn-icon" id="btnAudioToggle" title="Audio Sound FX">
+<span id="audioIcon">🔊</span>
+</button>
+<button class="btn-cart-bubble" id="btnOpenCart" title="Smart Cart">
+<span>🛒</span>
+<span class="cart-pill-count" id="cartCount">0</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Location Dropdown Modal / Drawer for Mobile & Desktop -->
+<div class="location-drawer-backdrop" id="locationBackdrop"></div>
+<div class="location-drawer" id="locationDrawer">
+<div class="drawer-drag-pill"></div>
+<div class="drawer-header-row">
+<h3>Apna Area Chuno</h3>
+<button class="btn-close-sm" id="btnCloseLocation">✕</button>
+</div>
+<!-- Location Input -->
+<div class="loc-input-cluster">
+<span class="search-icon">🔍</span>
+<input autocomplete="off" id="locationInput" placeholder="City, area ya pincode search karo (e.g. Bandra, Koramangala)..." spellcheck="false" type="text"/>
+<button class="loc-clear-btn" id="btnClearLocInput" title="Clear location text">✕</button>
+<button class="btn-detect-gps" id="btnDetect">
+<span>⌖ Detect GPS</span>
+</button>
+</div>
+<!-- Autocomplete Suggestions -->
+<div class="live-suggestions-list" id="suggestionsBox"></div>
+<!-- Popular Indian Metros -->
+<div class="popular-cities-wrap">
+<span class="popular-title">POPULAR CITIES:</span>
+<div class="cities-grid-chips" id="metroChips"><button class="city-pill">Delhi</button><button class="city-pill">Mumbai</button><button class="city-pill">Bengaluru</button><button class="city-pill">Hyderabad</button><button class="city-pill">Pune</button><button class="city-pill">Kolkata</button><button class="city-pill">Patna</button><button class="city-pill">Chennai</button><button class="city-pill">Lucknow</button><button class="city-pill">Jaipur</button></div>
+</div>
+<div class="drawer-status-note" id="locationFeedback">
+      GPS ya area select karke live offers discover karo.
+    </div>
+</div>
+<!-- Main Food Feed Container -->
+<main class="app-main" id="top">
+<!-- Top Catchy Indian Hero Banner -->
+<section class="desi-hero-banner">
+<div class="hero-left">
+<div class="trust-badge">
+<span>⚡ ASLI MENUS · REAL COUPONS · MAXIMUM BACHAT</span>
+</div>
+<h1 class="hero-headline">
+          Bhookh Badi,<br/>
+<span class="headline-highlight">Toh Bill Hoga Chhota!</span>
+</h1>
+<p class="hero-subtext">
+          Swiggy par restaurant ke menu ke andar ke items aur hidden coupon codes compare karo. Asli discount math hum lagayenge!
+        </p>
+</div>
+<!-- Quick Location Trigger Button on Mobile -->
+<button class="hero-loc-trigger" id="btnHeroLoc">
+<div class="trigger-left">
+<span class="pin-ico">📍</span>
+<div>
+<small>Deliver to</small>
+<strong id="heroLocationLabel">Delhi</strong>
+</div>
+</div>
+<span class="change-lbl">Change ↗</span>
+</button>
+</section>
+<!-- Quick Cravings Horizontal Story-Style Carousel -->
+<section class="cravings-carousel-section">
+<div class="cravings-scroll">
+<button class="craving-bubble active" data-query="">
+<span class="bubble-icon">✨</span>
+<span class="bubble-title">Sab Kuch</span>
+</button>
+<button class="craving-bubble" data-query="Biryani">
+<span class="bubble-icon">🍗</span>
+<span class="bubble-title">Biryani</span>
+</button>
+<button class="craving-bubble" data-query="Pizza">
+<span class="bubble-icon">🍕</span>
+<span class="bubble-title">Pizza</span>
+</button>
+<button class="craving-bubble" data-query="Burger">
+<span class="bubble-icon">🍔</span>
+<span class="bubble-title">Burgers</span>
+</button>
+<button class="craving-bubble" data-query="Rolls">
+<span class="bubble-icon">🌯</span>
+<span class="bubble-title">Rolls</span>
+</button>
+<button class="craving-bubble" data-query="Thali">
+<span class="bubble-icon">🍛</span>
+<span class="bubble-title">Thali</span>
+</button>
+<button class="craving-bubble" data-query="Mithai">
+<span class="bubble-icon">🍮</span>
+<span class="bubble-title">Mithai &amp; Sweet</span>
+</button>
+<button class="craving-bubble" data-query="Chai">
+<span class="bubble-icon">☕</span>
+<span class="bubble-title">Chai &amp; Coffee</span>
+</button>
+<button class="craving-bubble" data-query="Red Bull">
+<span class="bubble-icon">⚡</span>
+<span class="bubble-title">Red Bull</span>
+</button>
+<button class="craving-bubble" data-query="Ice Cream">
+<span class="bubble-icon">🍨</span>
+<span class="bubble-title">Ice Cream</span>
+</button>
+</div>
+</section>
+<!-- Interactive Search, Budget & Filter Bar -->
+<section class="search-command-deck">
+<!-- Search Input Bar -->
+<div class="main-search-input-box">
+<span class="search-lens">🔍</span>
+<input autocomplete="off" id="searchInput" placeholder="Menu ke andar dhoondho: Biryani, Red Bull, Cold Coffee..." type="text"/>
+<button class="search-clear-btn" hidden="" id="searchClear">✕</button>
+</div>
+<!-- Mode & Budget Row -->
+<div class="deck-middle-controls">
+<!-- Search Mode Toggle -->
+<div class="search-mode-pills">
+<button class="mode-pill active" data-mode="items" id="modeItems">
+<span>Dishes &amp; Add-ons</span>
+</button>
+<button class="mode-pill" data-mode="restaurants" id="modeRestaurants">
+<span>Restaurants</span>
+</button>
+</div>
+<!-- Budget Box -->
+<div class="budget-box">
+<span class="budget-label">ORDER BUDGET:</span>
+<div class="budget-input-wrap">
+<span class="cur">₹</span>
+<input id="basketAmount" max="25000" min="50" step="50" type="number" value="500"/>
+</div>
+</div>
+<!-- Sort Selector -->
+<div class="sort-box">
+<select aria-label="Sort restaurants" id="sortSelect">
+<option value="best">👑 Asli Best Deal (Sabse Zyada % Bachat)</option>
+<option value="budget">💰 Mere Budget Par Zyada Bachat</option>
+<option value="highest_pct">🏷️ Highest % Off Badge</option>
+<option value="rating">★ Highest Star Rating</option>
+<option value="delivery">🚀 Sabse Tez Delivery</option>
+<option value="lowest_item">📉 Lowest Matched Dish Price</option>
+</select>
+</div>
+</div>
+<!-- Quick Filter Pills -->
+<div class="filter-chips-cluster">
+<div class="chips-scroll-lane" id="quickFilters">
+<button class="desi-chip" data-filter="offers">
+<span>⚡ Offers Only</span>
+<small>29</small>
+</button>
+<button class="desi-chip" data-filter="coupons">
+<span>🎟️ Coupon Codes</span>
+<small>1</small>
+</button>
+<button class="desi-chip" data-filter="p50">
+<span>🔥 50%+ Off</span>
+<small>1</small>
+</button>
+<button class="desi-chip" data-filter="addons">
+<span>🍟 Add-on Hacks (&lt;₹49)</span>
+<small>1</small>
+</button>
+<button class="desi-chip" data-filter="veg">
+<span>🟢 Pure Veg</span>
+<small>8</small>
+</button>
+<button class="desi-chip" data-filter="rated">
+<span>★ 4.2+ Star</span>
+<small>23</small>
+</button>
+<button class="desi-chip" data-filter="fast">
+<span>🚀 Under 25 Min</span>
+<small>20</small>
+</button>
+</div>
+<div class="chips-scroll-lane" id="cuisineFilters">
+<button class="desi-chip active" data-cuisine="">
+      All Cuisines
+    </button>
+<button class="desi-chip" data-cuisine="Desserts">
+      Desserts <small>14</small>
+</button>
+<button class="desi-chip" data-cuisine="Beverages">
+      Beverages <small>14</small>
+</button>
+<button class="desi-chip" data-cuisine="Bakery">
+      Bakery <small>11</small>
+</button>
+<button class="desi-chip" data-cuisine="Snacks">
+      Snacks <small>7</small>
+</button>
+<button class="desi-chip" data-cuisine="North Indian">
+      North Indian <small>6</small>
+</button>
+<button class="desi-chip" data-cuisine="Fast Food">
+      Fast Food <small>4</small>
+</button>
+<button class="desi-chip" data-cuisine="Sweets">
+      Sweets <small>4</small>
+</button>
+<button class="desi-chip" data-cuisine="South Indian">
+      South Indian <small>4</small>
+</button>
+<button class="desi-chip" data-cuisine="Chinese">
+      Chinese <small>4</small>
+</button>
+<button class="desi-chip" data-cuisine="Chaat">
+      Chaat <small>3</small>
+</button>
+</div>
+</div>
+<!-- Real-time Stats & Telemetry Strip -->
+<div class="stats-strip">
+<div class="stats-left">
+<span class="live-dot" id="beaconStatus" style="background: var(--swiggy-orange);"></span>
+<strong id="statCount">29 Restaurants Found</strong>
+<span class="sub-stat" id="statCoverage">1/29 Menus Checked · 1 Verified Coupons</span>
+</div>
+<div class="stats-right">
+<button class="btn-action-sm" disabled="" id="btnWider">+ 7 km Scan</button>
+<button class="btn-action-sm" id="btnRefresh">↻ Refresh</button>
+</div>
+</div>
+</section>
+<!-- Crystal Clear Restaurant Cards Grid -->
+<section class="restaurants-grid" id="cardsGrid">
+<article class="bhookhad-card" data-id="378311">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="378311">
+<img alt="Blue Tokai Coffee Roasters" class="poster-img" loading="lazy" src="assets/images/2b2b1a28-54bb-4298-8d58-1ef68a54b80c_378311.JPG"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="378311">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">70% OFF</span>
+<span class="deal-sub-text">Up to ₹130</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Blue Tokai Coffee Roasters">Blue Tokai Coffee Roasters</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.6</span>
+<span>⏱ 15-20 mins</span>
+<span>📍 1.1 km</span>
+<span>• N block</span>
+</div>
+<p class="rest-cuisines-text">Cafe, Coffee, Beverages</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel has-code">
+<div class="deal-header-line">
+<span class="deal-kicker-lbl">⚡ BEST COUPON DEAL</span>
+<button class="copy-coupon-btn" data-action="copy-code" data-code="DELULU4FOOD" title="Click to copy coupon code">
+<span class="code-txt">DELULU4FOOD</span>
+<span class="copy-ico">⧉</span>
+</button>
+</div>
+<div class="coupon-headline-title">70% OFF UPTO ₹130</div>
+<div class="coupon-terms-note">ON SELECT ITEMS</div>
+<div class="deal-math-summary">
+<span>Save <strong>₹130</strong> on ₹186</span>
+<span class="roi-pill-badge">69.9% Bachat</span>
+</div>
+</div>
+<!-- Budget Matcher Output -->
+<div class="card-budget-saving-note">
+<span>At ₹500 budget:</span>
+<strong>Save ~₹130 (DELULU4FOOD)</strong>
+</div>
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="378311">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/378311" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="659837">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="659837">
+<img alt="Bakingo" class="poster-img" loading="lazy" src="assets/images/2c922cfb-1f94-498a-b8f0-36251484cbfb_659837.JPG"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="659837">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Bakingo">Bakingo</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.6</span>
+<span>⏱ 20-25 mins</span>
+<span>📍 3.6 km</span>
+<span>• Naiwala</span>
+</div>
+<p class="rest-cuisines-text">Bakery, Desserts, Beverages, Snacks</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="659837">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/659837" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="90566">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="90566">
+<img alt="Chaayos Chai+Snacks=Relax" class="poster-img" loading="lazy" src="assets/images/2ce18342-6c04-4ebc-9725-788819ddaa56_90566.JPG"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="90566">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Chaayos Chai+Snacks=Relax">Chaayos Chai+Snacks=Relax</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.6</span>
+<span>⏱ 15-20 mins</span>
+<span>📍 0.4 km</span>
+<span>• Connaught Place</span>
+</div>
+<p class="rest-cuisines-text">Beverages, Chaat, Bakery, Snacks, Street Food, healthy, Home Food, Maharashtrian, Italian, Desserts</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="90566">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/90566" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="526516">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="526516">
+<img alt="Salad Days" class="poster-img" loading="lazy" src="assets/images/da84a0d0-52b6-4349-98cf-188f86e6a403_526516.jpg"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="526516">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Salad Days">Salad Days</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.6</span>
+<span>⏱ 5-10 mins</span>
+<span>📍 1.1 km</span>
+<span>• Gole Market</span>
+</div>
+<p class="rest-cuisines-text">Salads, healthy, food, Snacks</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="526516">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/526516" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="1420857">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="1420857">
+<img alt="Narayana Kitchen" class="poster-img" loading="lazy" src="assets/images/487dfe71-6f05-49e7-96f0-fcfbca72350e_1420857.jpg"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span class="veg-tag-pill">● PURE VEG</span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="1420857">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Narayana Kitchen">Narayana Kitchen</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.6</span>
+<span>⏱ 45-50 mins</span>
+<span>📍 9.3 km</span>
+<span>• Mayur Vihar</span>
+</div>
+<p class="rest-cuisines-text">Indian, Pastas, Chinese</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="1420857">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/1420857" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="1082750">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="1082750">
+<img alt="A2B - Adyar Ananda Bhavan" class="poster-img" loading="lazy" src="assets/images/1e163e36-6a09-4779-9aa8-3bc788642557_1082750.JPG"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span class="veg-tag-pill">● PURE VEG</span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="1082750">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="A2B - Adyar Ananda Bhavan">A2B - Adyar Ananda Bhavan</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.6</span>
+<span>⏱ 20-25 mins</span>
+<span>📍 1.2 km</span>
+<span>• Connaught Place</span>
+</div>
+<p class="rest-cuisines-text">South Indian, Chaat, Sweets, North Indian</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="1082750">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/1082750" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="16253">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="16253">
+<img alt="Choko la" class="poster-img" loading="lazy" src="assets/images/6d1edc4c-541e-4679-a5eb-6154cbc90480_6c76da84-5fcd-4bca-a5a1-216135223571.jpg"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="16253">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Choko la">Choko la</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.6</span>
+<span>⏱ 25-30 mins</span>
+<span>📍 6.3 km</span>
+<span>• Rabinder Nagar</span>
+</div>
+<p class="rest-cuisines-text">Bakery, Desserts</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="16253">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/16253" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="58217">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="58217">
+<img alt="Theobroma" class="poster-img" loading="lazy" src="assets/images/89cd962c-0de1-47d7-a454-a42076e5d14c_58217.JPG"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="58217">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Theobroma">Theobroma</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.5</span>
+<span>⏱ 5-10 mins</span>
+<span>📍 1.3 km</span>
+<span>• Mezzanine Connaught</span>
+</div>
+<p class="rest-cuisines-text">Bakery, Desserts</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="58217">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/58217" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="502412">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="502412">
+<img alt="Suchali's Artisan Bakehouse" class="poster-img" loading="lazy" src="assets/images/d96ec0e9-e215-48e8-b61c-8d22f1ca5b56_502412.JPG"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="502412">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Suchali's Artisan Bakehouse">Suchali's Artisan Bakehouse</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.5</span>
+<span>⏱ 15-20 mins</span>
+<span>📍 1.0 km</span>
+<span>• Chittaranjan Park</span>
+</div>
+<p class="rest-cuisines-text">Bakery, Desserts, Beverages</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="502412">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/502412" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="40414">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="40414">
+<img alt="Bikanervala" class="poster-img" loading="lazy" src="assets/images/14d68c58-764f-40fe-8fb4-f93e6e71ea00_40414.jpg"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span class="veg-tag-pill">● PURE VEG</span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="40414">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Bikanervala">Bikanervala</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.4</span>
+<span>⏱ 20-25 mins</span>
+<span>📍 0.3 km</span>
+<span>• Connaught Place</span>
+</div>
+<p class="rest-cuisines-text">North Indian, Snacks, Chaat, Sweets</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="40414">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/40414" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="7574">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="7574">
+<img alt="Sagar Ratna" class="poster-img" loading="lazy" src="assets/misc/sed3lcphrutnn1fledyq"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span class="veg-tag-pill">● PURE VEG</span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="7574">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Sagar Ratna">Sagar Ratna</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.4</span>
+<span>⏱ 15-20 mins</span>
+<span>📍 1.2 km</span>
+<span>• Janpath Rd</span>
+</div>
+<p class="rest-cuisines-text">South Indian, North Indian, Chinese</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="7574">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/7574" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="438728">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="438728">
+<img alt="Onlinecake.in" class="poster-img" loading="lazy" src="assets/images/ced9f583-b6a5-4a1a-84bf-ec4797fe941e_cb4f2559-0ef7-4ce0-937e-bb7cc94abe0a.jpg"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="438728">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Onlinecake.in">Onlinecake.in</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.4</span>
+<span>⏱ 35-40 mins</span>
+<span>📍 7.7 km</span>
+<span>• Laxmi Nagar</span>
+</div>
+<p class="rest-cuisines-text">Bakery</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="438728">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/438728" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="554643">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="554643">
+<img alt="Third Wave Coffee" class="poster-img" loading="lazy" src="assets/misc/6281c56e-c9d3-4f09-aeea-f20834491572_a667d480-fd80-4d0f-a7be-8f6ff29b83fc.jpg_compressed"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="554643">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Third Wave Coffee">Third Wave Coffee</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.4</span>
+<span>⏱ 20-25 mins</span>
+<span>📍 2.4 km</span>
+<span>• Connaught Place</span>
+</div>
+<p class="rest-cuisines-text">Beverages, Pizzas</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="554643">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/554643" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="69455">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="69455">
+<img alt="Starbucks Coffee" class="poster-img" loading="lazy" src="assets/images/4ee9bdd5-e87e-489c-85aa-d1fbbc376b2e_69455.JPG"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="69455">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Starbucks Coffee">Starbucks Coffee</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.3</span>
+<span>⏱ 10-15 mins</span>
+<span>📍 0.9 km</span>
+<span>• Connaught Place</span>
+</div>
+<p class="rest-cuisines-text">Beverages, Cafe, Snacks, Desserts, Bakery, Ice Cream</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="69455">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/69455" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="152971">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="152971">
+<img alt="KFC" class="poster-img" loading="lazy" src="assets/images/85bed102-a722-4b8c-a5de-42ab1c9b2124_152971.JPG"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="152971">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="KFC">KFC</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.3</span>
+<span>⏱ 15-20 mins</span>
+<span>📍 0.5 km</span>
+<span>• Connaught Place</span>
+</div>
+<p class="rest-cuisines-text">Burgers, Fast Food, Rolls &amp; Wraps</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="152971">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/152971" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="651212">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="651212">
+<img alt="McDonald's" class="poster-img" loading="lazy" src="assets/images/ba3c93cd-2af9-488a-acea-c833fdf5a342_651212.JPG"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="651212">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="McDonald's">McDonald's</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.3</span>
+<span>⏱ 10-15 mins</span>
+<span>📍 1.0 km</span>
+<span>• ECE House</span>
+</div>
+<p class="rest-cuisines-text">American, Fast Food, Beverages</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="651212">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/651212" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="8614">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="8614">
+<img alt="Burger King" class="poster-img" loading="lazy" src="assets/images/ee1fdf16-ea5f-4a44-9e58-7b3a9dee2618_8614.jpg"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span></span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="8614">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Burger King">Burger King</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.3</span>
+<span>⏱ 15-20 mins</span>
+<span>📍 0.9 km</span>
+<span>• Connaught Place</span>
+</div>
+<p class="rest-cuisines-text">Burgers, American</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="8614">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/8614" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+<article class="bhookhad-card" data-id="193477">
+<!-- Crystal Clear Poster -->
+<div class="card-poster-frame" data-action="open-menu" data-id="193477">
+<img alt="Haldiram's" class="poster-img" loading="lazy" src="assets/images/31543ec5-767c-4c02-a99d-cabbf8ecf8f8_193477.jpg"/>
+<!-- Top Floating Badges -->
+<div class="poster-top-bar">
+<span class="veg-tag-pill">● PURE VEG</span>
+<div style="display:flex; gap:6px;">
+<button class="btn-vs-pill" data-action="toggle-compare" data-id="193477">
+              + VS
+            </button>
+</div>
+</div>
+<!-- Floating Deal Badge on Poster -->
+<div class="poster-bottom-badge">
+<span class="deal-lead-text">Deals Available</span>
+<span class="deal-sub-text">Deal</span>
+</div>
+</div>
+<!-- Card Details -->
+<div class="card-body-details">
+<h3 class="rest-title" title="Haldiram's">Haldiram's</h3>
+<div class="rest-meta-row">
+<span class="star-tag">★ 4.3</span>
+<span>⏱ 25-30 mins</span>
+<span>📍 1.2 km</span>
+<span>• Connaught Place</span>
+</div>
+<p class="rest-cuisines-text">Cakes, Beverages, Desserts</p>
+<!-- Best Deal & Coupon Box -->
+<div class="coupon-deal-panel is-loading">
+<div class="coupon-terms-note">◌ Scanning menu items &amp; hidden coupons...</div>
+</div>
+<!-- Budget Matcher Output -->
+<!-- In-Card Matched Dishes Preview -->
+<!-- Actions -->
+<div class="card-bottom-actions">
+<button class="btn-open-menu-view" data-action="open-menu" data-id="193477">
+            Menu &amp; Deals Dekho 🍽️
+          </button>
+<a class="btn-swiggy-link" href="https://www.swiggy.com/restaurants/193477" rel="noopener noreferrer" target="_blank">
+            Swiggy ↗
+          </a>
+</div>
+</div>
+</article>
+</section>
+<div class="load-more-center">
+<button class="btn-load-more" id="btnLoadMore">Aur Restaurants Dekho</button>
+</div>
+<!-- Mathematical Deal Arbitrage Explanation -->
+<section class="deal-logic-section">
+<div class="logic-container">
+<span class="logic-kicker">BACHAT KA ASLI FORMULA</span>
+<h2 class="logic-title">Swiggy Ke Fake Discounts Se Bacho!</h2>
+<p class="logic-desc">
+          Badi-badi delivery apps 70% OFF dikhati hain par ₹120 ki limit laga deti hain! Bhookhad calculate karta hai aapka actual rupee-to-rupee discount.
+        </p>
+<div class="logic-cards">
+<div class="logic-card">
+<div class="logic-card-tag">CAP TRAP</div>
+<h3>70% OFF up to ₹140</h3>
+<p>Agar aapka order ₹600 ka hai, toh ₹140 discount ke baad aapki asli bachat sirf <strong>23.3%</strong> hui!</p>
+</div>
+<div class="logic-card highlight">
+<div class="logic-card-tag best">BEST VALUE</div>
+<h3>₹150 Flat OFF (Min ₹399)</h3>
+<p>₹400 ke order par direct ₹150 off mila, yaani solid <strong>37.5% real bachat</strong> sidhe pocket me!</p>
+</div>
+<div class="logic-card">
+<div class="logic-card-tag">HACK</div>
+<h3>Secret Add-on Deals</h3>
+<p>Hum restaurant ke andar ke add-on fries, dips aur cold drinks scan karte hain taaki aapko saste me combo mil sake.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Telegram VIP Swiggy Looters 06 Community Card -->
+<section class="telegram-loot-section">
+<div class="tg-card-wrapper">
+<div class="tg-card-header">
+<div class="tg-live-pill">
+<span class="tg-dot"></span>
+<span>🔵 VERIFIED LOOT COMMUNITY · 100% FREE TRICKS</span>
+</div>
+<span class="tg-handle-tag">@swiggylooters06</span>
+</div>
+<div class="tg-card-content">
+<div class="tg-text-block">
+<h2 class="tg-card-title">Swiggy Looters 06 🚀</h2>
+<p class="tg-card-description">
+              Daily <strong>100% Free Food Tricks</strong>, ₹1 Flash Deals, Secret Swiggy Glitch Coupons, Bug Offers aur Instant Loot Alerts sidhe apne phone par paayein! Ek bhi loot miss mat karo!
+            </p>
+<div class="tg-feature-chips">
+<span class="tg-chip">⚡ Instant Loot Alerts</span>
+<span class="tg-chip">🍔 ₹0 Food Hacks</span>
+<span class="tg-chip">🎟️ 80%+ Secret Coupons</span>
+</div>
+</div>
+<div class="tg-action-col">
+<a class="btn-tg-join-main" href="https://telegram.me/swiggylooters06" id="btnJoinTgMain" rel="noopener noreferrer" target="_blank">
+<span class="tg-plane-icon">✈️</span>
+<span class="tg-join-copy">
+<strong>Join Telegram Channel</strong>
+<small>@swiggylooters06 · 100% Free</small>
+</span>
+<span class="tg-arrow-right">→</span>
+</a>
+<div class="tg-member-trust">
+<span>🔥 50,000+ Smart Foodies Saving Daily</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Radar Telemetry Widget (Moved to Bottom as Requested) -->
+<section class="bottom-radar-section" id="radarSection">
+<div class="radar-widget-box">
+<div class="radar-visual">
+<canvas height="280" id="radarCanvas" width="280"></canvas>
+<div class="radar-crosshair"></div>
+</div>
+<div class="radar-telemetry-text">
+<div class="radar-tag">LIVE TELEMETRY SCANNER</div>
+<h3>Background Area Radar</h3>
+<p>Yeh radar Swiggy ke delivery grid ko live interrogate karta hai aur background me menus decode karta hai.</p>
+<div class="telemetry-metrics-grid">
+<div>
+<small>SECTOR RADIUS</small>
+<strong id="hudRadius">7.0 KM</strong>
+</div>
+<div>
+<small>VENUES FOUND</small>
+<strong id="hudVenues">29 TARGETS</strong>
+</div>
+<div>
+<small>WORKERS</small>
+<strong id="hudIndexRate">3 ACTIVE</strong>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Smart Cart Drawer & Backdrop -->
+<div class="cart-backdrop" id="cartBackdrop"></div>
+<aside class="cart-drawer-panel" id="cartDrawer">
+<div class="drawer-header">
+<div class="drawer-title">
+<span class="drawer-icon">🛒</span>
+<h3>Smart Cart &amp; Coupon Optimizer</h3>
+</div>
+<button class="drawer-close-btn" id="btnCloseCart">✕</button>
+</div>
+<div class="drawer-body">
+<div class="cart-items-deck" id="cartItemsList">
+<div class="empty-cart-state">
+<p>Aapka cart abhi khali hai.</p>
+<small>Kisi bhi restaurant ke menu me <strong>"+ Add"</strong> dabao aur dekho live discount kaise milta hai!</small>
+</div>
+</div>
+<!-- Threshold Nudge Card -->
+<div class="coupon-nudge-card" hidden="" id="couponNudgeCard">
+<div class="nudge-sparkle">💡 SMART BACHAT NUDGE</div>
+<div class="nudge-text" id="nudgeText">Loading recommendation...</div>
+</div>
+<div class="cart-total-strip">
+<div class="calc-row">
+<span>Subtotal</span>
+<span id="cartSubtotal">₹0</span>
+</div>
+<div class="calc-row highlight">
+<span>Best Coupon Discount</span>
+<span id="cartSavings" style="color:var(--accent-green);">-₹0</span>
+</div>
+<div class="calc-row net-row">
+<span>Final Payable (Approx)</span>
+<span id="cartNet" style="font-weight:800; font-size:19px; color:#fff;">₹0</span>
+</div>
+<button class="btn-clear-cart" id="btnClearCart">Cart Khali Karo</button>
+</div>
+</div>
+</aside>
+<!-- Side-by-Side Versus Battle Dock -->
+<aside class="battle-dock" hidden="" id="compareDock">
+<div class="battle-dock-inner">
+<div class="battle-meta">
+<span class="battle-tag">VERSUS</span>
+<span>Compare Restaurants (<span id="compareCount">0</span>/2)</span>
+</div>
+<div class="battle-slots" id="dockSlots"></div>
+<div class="battle-actions">
+<button class="btn-battle-launch" disabled="" id="btnLaunchCompare">Compare Karein ⚡</button>
+<button class="btn-cancel-compare" id="btnClearCompare">Cancel</button>
+</div>
+</div>
+</aside>
+<!-- Deep Menu Modal Dialog -->
+<dialog class="custom-modal" id="menuDialog">
+<div class="modal-shell">
+<header class="modal-header">
+<div class="header-details">
+<span class="modal-kicker">MENU &amp; OFFERS</span>
+<h2 id="dialogTitle">Restaurant Menu</h2>
+</div>
+<button class="modal-close-btn" id="btnCloseDialog">✕</button>
+</header>
+<div class="modal-scrollable-body" id="dialogContent"></div>
+</div>
+</dialog>
+<!-- Versus Compare Modal -->
+<dialog class="custom-modal compare-modal" id="compareDialog">
+<div class="modal-shell">
+<header class="modal-header">
+<div class="header-details">
+<span class="modal-kicker">HEAD-TO-HEAD BATTLE</span>
+<h2>Restaurant Deal Comparison</h2>
+</div>
+<button class="modal-close-btn" id="btnCloseCompareDialog">✕</button>
+</header>
+<div class="modal-scrollable-body" id="compareDialogContent"></div>
+</div>
+</dialog>
+<!-- Toast Notification Hub -->
+<div class="toast-hub" id="toastHub"></div>
+<!-- Mobile Bottom Sticky Navigation Bar -->
+<nav class="mobile-bottom-nav">
+<a class="mobile-nav-item active" href="#top" id="mobNavHome">
+<span class="nav-icon">🏠</span>
+<span class="nav-lbl">Explore</span>
+</a>
+<button class="mobile-nav-item" id="mobNavSearch">
+<span class="nav-icon">🔍</span>
+<span class="nav-lbl">Search</span>
+</button>
+<button class="mobile-nav-item" id="mobNavLoc">
+<span class="nav-icon">📍</span>
+<span class="nav-lbl">Location</span>
+</button>
+<button class="mobile-nav-item" id="mobNavCart">
+<span class="nav-icon">🛒</span>
+<span class="nav-lbl">Cart (<span id="mobCartCount">0</span>)</span>
+</button>
+</nav>
+<!-- Footer -->
+<footer class="app-footer">
+<div class="footer-wrap">
+<div class="footer-logo">Bhookh<span>ad</span></div>
+<p class="footer-copy">
+        An independent food discovery &amp; deal optimizer tool. Special Deal Intelligence Credits &amp; Thanks to 
+        <a class="footer-credit-link" href="https://telegram.me/swiggylooters06" rel="noopener noreferrer" target="_blank">@swiggylooters06</a>.
+        Not affiliated with Swiggy. All restaurant data, dishes, images, and coupons are fetched via Swiggy consumer APIs.
+      </p>
+<div class="footer-pill">Made with ❤️ for Indian Foodies · Credits to @swiggylooters06</div>
+</div>
+</footer>
+<!-- PWA Install Prompt Banner / Bottom Sheet (Mobile Optimized) -->
+<aside class="pwa-install-sheet" hidden="" id="pwaInstallSheet">
+<div class="pwa-sheet-content">
+<img alt="Bhookhad App Icon" class="pwa-sheet-icon" src="/icon-192.png"/>
+<div class="pwa-sheet-text">
+<h4>Bhookhad App Install Karein</h4>
+<p>Home Screen se 1-Tap me secret coupons &amp; live menus access karo!</p>
+</div>
+<div class="pwa-sheet-actions">
+<button class="btn-pwa-install" id="btnPwaInstall">📲 Install App</button>
+<button aria-label="Dismiss" class="btn-pwa-dismiss" id="btnPwaDismiss">✕</button>
+</div>
+</div>
+</aside>
+<script src="assets/js/app.js"></script>
+</body></html>
